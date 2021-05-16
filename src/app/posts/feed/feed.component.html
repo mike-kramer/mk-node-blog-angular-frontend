@@ -1,0 +1,4 @@
+<p-panel header="Последние публикации">
+    <app-post-list [posts]="posts"></app-post-list>
+</p-panel>
+<p-paginator [rows]="20" [totalRecords]="total" (onPageChange)="changePage($event)" [first]="20 * (currentPage - 1)"></p-paginator>

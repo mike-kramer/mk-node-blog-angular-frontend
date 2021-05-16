@@ -1,1 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* include CSS for prism toolbar */
+@import '~prismjs/plugins/toolbar/prism-toolbar.css';
+/* check node_modules/prismjs/themes/ for the available themes */
+@import '~prismjs/themes/prism-tomorrow';
+
+body {
+    padding-left: 300px;
+    padding-top: 76px;
+    margin: 0;
+    &.no-aside {
+        padding-left: 0;
+        aside {
+            display: none !important;
+        }
+        header {
+            left: 0 !important;
+        }
+    }
+}
+a.p-button {
+    text-decoration: none;
+}
+a.p-button:hover {
+    background: rgba(63, 81, 181, 0.92);
+    color: rgb(255, 255, 255);
+    border-color: transparent;
+}
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+.line-numbers-rows > span {
+    display: block;
+    counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: 0.8em;
+    text-align: right;
+}

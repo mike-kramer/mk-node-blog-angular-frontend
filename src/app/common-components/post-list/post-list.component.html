@@ -1,0 +1,6 @@
+<p-panel *ngFor="let p of posts" [header]="p.title">
+    {{p.excerptOrText}}
+    <ng-template pTemplate="footer">
+        <a [routerLink]="['/post', p.id]" pButton>Читать</a>
+    </ng-template>
+</p-panel>
