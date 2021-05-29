@@ -1,0 +1,28 @@
+<p-panel header="Редактирование поста" *ngIf="categoriesFormDropdown.length > 0">
+    <div class="p-grid">
+        <form [formGroup]="postForm" class="p-col-8 main-form p-fluid">
+            <div class="p-field">
+                <label for="postTitle">Название поста</label>
+                <input id="postTitle" formControlName="title" type="text" pInputText>
+            </div>
+            <div class="p-field">
+                <label>Категория</label>
+                <p-dropdown [options]="categoriesFormDropdown" optionLabel="name" optionValue="id" placeholder="Выберете категорию"></p-dropdown>
+            </div>
+            <div class="p-field">
+                <label for="postExcerpt">Краткое содержание</label>
+                <textarea id="postExcerpt" pInputTextarea style="width: 100%; height: 300px" [autoResize]="false"></textarea>
+            </div>
+            <div class="p-field">
+                <label for="postText">Текст</label>
+                <textarea id="postText" pInputTextarea style="width: 100%; height: 600px" [autoResize]="false"></textarea>
+            </div>
+        </form>
+        <div class="p-col-4">
+            <app-file-uploader></app-file-uploader>
+            <p-panel  [style]="{'margin-top': '20px', 'display': 'block'}">
+                <button pButton class="p-button p-button-success" icon="pi pi-check" label="Сохранить" [disabled]="inProcess" (click)="saveForm()"></button>
+            </p-panel>
+        </div>
+    </div>
+</p-panel>

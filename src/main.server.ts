@@ -15,5 +15,18 @@ if (environment.production) {
   enableProdMode();
 }
 
+global.localStorage = {
+    getItem(key: string): string | null {
+        return null;
+    },
+    key(index: number): string | null {
+        return null;
+    }, length: 0, removeItem(key: string): void {
+    }, setItem(key: string, value: string): void {
+    }, clear(): void {
+    }
+
+}
+
 export { AppServerModule } from './app/app.server.module';
 export { renderModule, renderModuleFactory } from '@angular/platform-server';

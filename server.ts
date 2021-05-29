@@ -7,6 +7,8 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import * as fs from "fs";
+
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -31,7 +33,16 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+      const serverRender: boolean = req.path.indexOf("admin") == -1;
+      if (serverRender) {
+          res.render(indexHtml, {req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl}]});
+      } else {
+          let filePath = join(distFolder, indexHtml);
+          if (!filePath.endsWith(".html")) {
+              filePath += ".html";
+          }
+          res.type("html").send(fs.readFileSync(filePath));
+      }
   });
 
   return server;

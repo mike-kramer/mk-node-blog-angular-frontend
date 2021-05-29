@@ -1,0 +1,15 @@
+<div style="max-width: 600px; margin: 20px auto;">
+    <p-panel header="Вход">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="p-fluid">
+            <div class="p-field">
+                <label for="login">Логин</label>
+                <input id="login" formControlName="username" type="text" pInputText>
+            </div>
+            <div class="p-field">
+                <label for="password">Пароль</label>
+                <input id="password" formControlName="password" type="password" pInputText>
+            </div>
+            <button label="Войти" icon="pi pi-arrow-circle-right" pButton></button>
+        </form>
+    </p-panel>
+</div>

@@ -1,0 +1,25 @@
+<p-panel header="Ваш комментарий">
+    <form (ngSubmit)="sendComment()" [formGroup]="commentForm">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">Ваше имя</label>
+                <input id="firstname1" formControlName="authorName" type="text" pInputText>
+            </div>
+            <div class="p-field p-col">
+                <label for="email">Ваш e-mail</label>
+                <input id="email" type="email" formControlName="authorEmail" pInputText>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="commentText">Ваш комментарий</label>
+            <textarea [rows]="5" id="commentText" pInputTextarea [autoResize]="true" formControlName="commentText" style="width: 100%;"></textarea>
+        </div>
+        <p-captcha #captchaComponent [siteKey]="recaptchaKey" (onResponse)="saveResponse($event)" (onExpire)="resetCaptchaAnswer()"></p-captcha>
+        <div style="margin-top: 20px;">
+            <p-message severity="error" text="Подтвердите, что вы не робот" *ngIf="commentForm.get('recaptchaAnswer')!.touched && commentForm.get('recaptchaAnswer')!.invalid"></p-message>
+        </div>
+        <div style="margin-top: 20px;">
+            <button pButton label="Отправить" icon="pi pi-check"></button>
+        </div>
+    </form>
+</p-panel>

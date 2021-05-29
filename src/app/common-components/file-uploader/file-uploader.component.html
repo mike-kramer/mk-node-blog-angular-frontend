@@ -1,0 +1,17 @@
+<p-panel header="Загрузка файлов">
+    <p-fileUpload
+        (onUpload)="showUploadedUrl($event)"
+        [auto]="true"
+        [headers]="headers"
+        [url]="fileUploadUrl"
+        name="file"
+    ></p-fileUpload>
+    <div class="p-fluid">
+        <div class="p-field">
+            <label for="uploadedPath">URL загруженного файла</label>
+            <input id="uploadedPath" readonly [formControl]="uploadedPath" type="text" pInputText>
+        </div>
+        <button pButton icon="pi pi-copy" [disabled]="justCopied" (click)="copyUrl()" [label]="justCopied ? 'Скопировано': 'Копировать'">
+        </button>
+    </div>
+</p-panel>

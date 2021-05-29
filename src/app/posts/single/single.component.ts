@@ -27,4 +27,11 @@ export class SingleComponent implements OnInit, AfterViewChecked  {
         this.highlightService.highlightAll();
     }
 
+    reloadComments() {
+        this.postService.single(this.post?.id).toPromise().then(
+            (resp) => {
+                (this.post as Post).comments = resp.comments;
+            }
+        )
+    }
 }

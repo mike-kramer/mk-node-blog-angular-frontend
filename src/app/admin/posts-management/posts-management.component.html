@@ -1,0 +1,31 @@
+<p-panel header="Посты">
+    <div style="margin: 10px 0;">
+        <p-button icon="pi pi-check" label="Новый пост" (onClick)="navigateToNewPost()"></p-button>
+    </div>
+    <p-table [value]="posts">
+        <ng-template pTemplate="header">
+            <tr>
+                <th width="30%">Название</th>
+                <th>Категория</th>
+                <th>Дата публикации</th>
+                <th>Действие</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-post>
+            <tr>
+                <td>{{post.title}}</td>
+                <td>
+                    <p-breadcrumb *ngIf="post.category" [model]="catBreadCrubms[post.category.id]" [style]="{border: 0}"></p-breadcrumb>
+                </td>
+                <td>
+                    {{post.createdAt | date: "short"}}
+                </td>
+                <td>
+                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-sm"></button>
+                    <button pButton icon="pi pi-eye" class="p-button-rounded p-button-secondary p-button-sm"></button>
+                    <button pButton icon="pi pi-times" class="p-button-rounded p-button-danger p-button-sm"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>

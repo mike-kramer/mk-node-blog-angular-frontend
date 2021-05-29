@@ -1,0 +1,23 @@
+<p-panel header="Категории">
+    <p-tree [value]="treeNodes" (onNodeExpand)="nodeExpanded($event);" (onNodeCollapse)="nodeCollapsed($event)">
+        <ng-template let-node  pTemplate="default">
+            {{node.label}}
+            <a href="#" (click)="$event.preventDefault(); addSub(node)"><i class="pi pi-plus"></i></a>
+            <a href="#" (click)="$event.preventDefault(); move(node, 'up')"><i class="pi pi-arrow-up"></i></a>
+            <a href="#" (click)="$event.preventDefault(); move(node, 'down')"><i class="pi pi-arrow-down"></i></a>
+            <a href="#" (click)="$event.preventDefault(); edit(node)"><i class="pi pi-pencil"></i></a>
+            <a href="#"  *ngIf="!node.children" (click)="$event.preventDefault(); delete($event, node)" style="color: red;"><i class="pi pi-minus-circle"></i></a>
+        </ng-template>
+    </p-tree>
+</p-panel>
+
+<p-dialog header="Добавить/редактировать категорию" [(visible)]="showCategoryDia">
+    <form [formGroup]="newCategoryForm" (ngSubmit)="saveCategory()" class="p-fluid">
+        <div class="p-field">
+            <label for="catName">Название категории</label>
+            <input id="catName" formControlName="name" type="text" pInputText>
+        </div>
+        <button pButton label="Сохранить"></button>
+    </form>
+</p-dialog>
+<p-confirmPopup></p-confirmPopup>
