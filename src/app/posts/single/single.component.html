@@ -2,7 +2,7 @@
     <div [innerHTML]="post.text"></div>
 
     <app-comment-form [postId]="post.id" (commentPosted)="reloadComments()" style="display: block; margin-top: 10px;"></app-comment-form>
-    <p-panel header="Комментарии" style="display: block; margin-top: 10px;">
+    <p-panel header="Комментарии" [style]="{display: 'block', 'margin-top' : '10px'}">
         <div style="margin: 10px 0;">
             <p-card *ngFor="let c of post.reversedComments" [header]="c.authorName">
                 <ng-template pTemplate="subtitle">{{c.createdAt | date}}</ng-template>

@@ -4,6 +4,11 @@ import {MenuItem} from "primeng/api";
 import {Category} from "./shared/models/category";
 import {AuthService} from "./shared/services/auth.service";
 import {isPlatformBrowser} from "@angular/common";
+import {NavigationEnd, Router} from "@angular/router";
+import {environment} from "../environments/environment";
+import {filter, map} from "rxjs/operators";
+
+declare let gtag: Function;
 
 @Component({
     selector: 'app-root',
@@ -32,7 +37,7 @@ export class AppComponent implements OnInit {
         }
     ]
 
-    constructor(private categoryService: CategoryService, private authService: AuthService, @Inject(PLATFORM_ID) private platform: Object) {
+    constructor(private categoryService: CategoryService, private authService: AuthService, @Inject(PLATFORM_ID) private platform: Object, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -47,7 +52,7 @@ export class AppComponent implements OnInit {
 
     private initMenu() {
         this.menuInitialized = false;
-        this.menu = this.authService.isAuth() ? this.adminMenu: [];
+        this.menu = this.authService.isAuth() ? this.adminMenu : [];
         this.categoryService.getCategories().then(
             (rootCat) => {
                 const createItemStruct = (cat: Category, level = 0) => {
@@ -71,6 +76,19 @@ export class AppComponent implements OnInit {
                     this.menu.push(createItemStruct(c));
                 }
                 this.menuInitialized = true;
+            }
+        );
+        this.router.events.pipe(
+            filter(e => e instanceof NavigationEnd),
+            map(e => <NavigationEnd>e)
+        ).subscribe((event: NavigationEnd) => {
+                if (environment.gaKey && isPlatformBrowser(this.platform)) {
+                    gtag('config', environment.gaKey,
+                        {
+                            'page_path': event.urlAfterRedirects
+                        }
+                    );
+                }
             }
         );
     }

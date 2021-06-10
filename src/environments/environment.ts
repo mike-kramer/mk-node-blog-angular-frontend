@@ -6,6 +6,7 @@ export const environment = {
   production: false,
     apiBase: "http://localhost:3000/api",
     recaptchaKey: "6LduXfoUAAAAAKlj_u2zwILIsjySURcE7PU6k1F8",
+    gaKey: null
 };
 
 /*
