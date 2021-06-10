@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
+import {Route, Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
     loginError: boolean = false;
 
-    constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+    constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
         }
         this.authService.login(this.loginForm.value).toPromise().then(
             () => {
-                alert("Ура");
+                this.router.navigate(["/admin/categories"]);
             }
         ).catch(
             () => {
