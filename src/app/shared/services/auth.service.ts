@@ -9,6 +9,7 @@ import {Subject} from "rxjs";
 })
 export class AuthService {
     loggedIn = new Subject();
+    loggedOut = new Subject();
 
     constructor(private api: ApiService, private authKeyStorage: AuthKeyStorageService) {
     }
@@ -24,6 +25,11 @@ export class AuthService {
                 this.loggedIn.next();
             })
         );
+    }
+
+    logout() {
+        this.authKeyStorage.deleteAuthKey();
+        this.loggedOut.next();
     }
 
 }

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PostsService} from "../../shared/services/posts.service";
 import {Subscription} from "rxjs";
 import {Location} from "@angular/common";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-feed',
@@ -15,10 +16,11 @@ export class FeedComponent implements OnInit {
     total: number = 0;
     currentPage: number = 1;
 
-    constructor(private activatedRoute: ActivatedRoute, public _location: Location, private postsService: PostsService, private router: Router) {
+    constructor(private activatedRoute: ActivatedRoute, public _location: Location, private postsService: PostsService, private router: Router, private titleService: Title) {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle("Блог Михаила Крамера. PHP и JS");
         this.activatedRoute.queryParamMap.subscribe(
             async (paramMap) => {
                 this.currentPage = paramMap.get("page") ? parseInt(paramMap.get("page") as string): 1;

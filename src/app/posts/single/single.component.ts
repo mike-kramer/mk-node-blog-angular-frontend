@@ -3,6 +3,7 @@ import {PostsService} from "../../shared/services/posts.service";
 import {HighlightService} from "../../shared/services/highlight.service";
 import {Post} from "../../shared/models/post";
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-single',
@@ -12,13 +13,14 @@ import {ActivatedRoute} from "@angular/router";
 export class SingleComponent implements OnInit, AfterViewChecked  {
     post?: Post;
 
-    constructor(private postService: PostsService, private highlightService: HighlightService, private activatedRoute: ActivatedRoute) {
+    constructor(private postService: PostsService, private highlightService: HighlightService, private activatedRoute: ActivatedRoute, private titleService: Title) {
     }
 
     ngOnInit(): void {
         this.activatedRoute.paramMap.subscribe(
             async (paramMap) => {
                 this.post = await this.postService.single(paramMap.get("id")).toPromise();
+                this.titleService.setTitle(this.post.title);
             }
         )
     }

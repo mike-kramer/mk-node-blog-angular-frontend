@@ -3,7 +3,7 @@ import {CategoryService} from "./shared/services/category.service";
 import {MenuItem} from "primeng/api";
 import {Category} from "./shared/models/category";
 import {AuthService} from "./shared/services/auth.service";
-import {isPlatformBrowser} from "@angular/common";
+import {isPlatformBrowser, Location} from "@angular/common";
 import {NavigationEnd, Router} from "@angular/router";
 import {environment} from "../environments/environment";
 import {filter, map} from "rxjs/operators";
@@ -32,12 +32,19 @@ export class AppComponent implements OnInit {
                 {
                     label: "Посты",
                     routerLink: "/admin/posts"
+                },
+                {
+                    label: "Выйти",
+                    command: () => {
+                        this.authService.logout();
+                    }
                 }
             ]
         }
     ]
 
-    constructor(private categoryService: CategoryService, private authService: AuthService, @Inject(PLATFORM_ID) private platform: Object, private router: Router) {
+    constructor(
+        private categoryService: CategoryService, private authService: AuthService, @Inject(PLATFORM_ID) private platform: Object, private router: Router, private _location: Location) {
     }
 
     ngOnInit(): void {
@@ -45,14 +52,22 @@ export class AppComponent implements OnInit {
         this.categoryService.categoriesUpdated.subscribe(
             () => this.initMenu()
         );
-        this.authService.loggedIn.next(
+        this.authService.loggedIn.subscribe(
             () => this.initMenu()
+        );
+        this.authService.loggedOut.subscribe(
+            () => {
+                this.initMenu();
+                if (this._location.path().includes("/admin")) {
+                    this.router.navigate(["admin/login"]);
+                }
+            }
         )
     }
 
     private initMenu() {
         this.menuInitialized = false;
-        this.menu = this.authService.isAuth() ? this.adminMenu : [];
+        this.menu = this.authService.isAuth() ? this.adminMenu.map(a => a) : [];
         this.categoryService.getCategories().then(
             (rootCat) => {
                 const createItemStruct = (cat: Category, level = 0) => {

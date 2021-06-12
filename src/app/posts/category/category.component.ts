@@ -6,6 +6,7 @@ import {Post} from "../../shared/models/post";
 import {ActivatedRoute, Router} from "@angular/router";
 import {addWarning} from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
 import {Location} from "@angular/common";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-category',
@@ -22,7 +23,8 @@ export class CategoryComponent implements OnInit {
         private postsService: PostsService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private _location: Location
+        private _location: Location,
+        private titleService: Title
     ) {
     }
 
@@ -31,6 +33,7 @@ export class CategoryComponent implements OnInit {
             async (paramMap) => {
                 this.currentPage = paramMap.get("page") ? parseInt(paramMap.get("page") as string): 1;
                 this.category = await this.categoryService.getCategory(parseInt(paramMap.get("id") as string));
+                this.titleService.setTitle(this.category.name);
                 let {posts, total} = await this.postsService.getPosts({page: this.currentPage, category: this.category.id}).toPromise();
                 this.posts = posts;
                 this.total = total;

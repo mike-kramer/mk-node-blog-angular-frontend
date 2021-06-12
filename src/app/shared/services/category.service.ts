@@ -85,16 +85,16 @@ export class CategoryService {
     }
 
     newCategory(catData: any) {
-        return this.api.post("category-admin/create", catData);
-    }
-
-    saveCategory(catData: any) {
-        return this.api.post("category-admin/update", catData).pipe(
+        return this.api.post("category-admin/create", catData).pipe(
             tap(() => {
                 this.categoryPromise = null;
                 this.categoriesUpdated.next();
             })
         );
+    }
+
+    saveCategory(catData: any) {
+        return this.api.post("category-admin/update", catData)
     }
 
     move(item: any, direction: string) {

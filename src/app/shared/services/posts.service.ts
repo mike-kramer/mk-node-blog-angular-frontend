@@ -44,6 +44,12 @@ export class PostsService {
         )
     }
 
+    adminSingle(id: number) {
+        return this.api.get(`posts-admin/${id}`).pipe(
+            map(resp => new Post().copyFrom(resp))
+        )
+    }
+
     savePost(data: any) {
         return this.api.post(data.id ? `posts-admin/${data.id}`: "posts-admin", data);
     }

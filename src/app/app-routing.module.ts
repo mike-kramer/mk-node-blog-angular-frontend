@@ -7,6 +7,7 @@ import {LoginComponent} from "./admin/login/login.component";
 import {CategoriesManagementComponent} from "./admin/categories-management/categories-management.component";
 import {PostsManagementComponent} from "./admin/posts-management/posts-management.component";
 import {PostEditComponent} from "./admin/posts-management/post-edit/post-edit.component";
+import {AdminGuardGuard} from "./shared/services/guards/admin-guard.guard";
 
 const routes: Routes = [
     {
@@ -26,8 +27,13 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
+        path: "admin",
+        redirectTo: "admin/categories",
+    },
+    {
         path: "admin/categories",
-        component: CategoriesManagementComponent
+        component: CategoriesManagementComponent,
+        canActivate: [AdminGuardGuard],
     },
     {
         path: "admin/posts",

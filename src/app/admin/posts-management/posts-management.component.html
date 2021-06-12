@@ -21,8 +21,8 @@
                     {{post.createdAt | date: "short"}}
                 </td>
                 <td>
-                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-sm"></button>
-                    <button pButton icon="pi pi-eye" class="p-button-rounded p-button-secondary p-button-sm"></button>
+                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-sm" [routerLink]="['/admin/posts', post.id]"></button>
+                    <button pButton icon="pi pi-eye" class="p-button-rounded p-button-secondary p-button-sm" [routerLink]="['/post', post.id]"></button>
                     <button pButton icon="pi pi-times" class="p-button-rounded p-button-danger p-button-sm"></button>
                 </td>
             </tr>

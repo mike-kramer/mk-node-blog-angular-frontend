@@ -16,6 +16,7 @@ import 'prismjs/components/prism-markup-templating';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-php';
+import 'prismjs/components/prism-bash';
 import './prism-plugin/linenumbers.js';
 // ... probably more, check out node_modules/prismjs/components
 

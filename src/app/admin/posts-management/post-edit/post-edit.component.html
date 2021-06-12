@@ -7,15 +7,15 @@
             </div>
             <div class="p-field">
                 <label>Категория</label>
-                <p-dropdown [options]="categoriesFormDropdown" optionLabel="name" optionValue="id" placeholder="Выберете категорию"></p-dropdown>
+                <p-dropdown [options]="categoriesFormDropdown" optionLabel="name" optionValue="id" formControlName="categoryId" placeholder="Выберете категорию"></p-dropdown>
             </div>
             <div class="p-field">
                 <label for="postExcerpt">Краткое содержание</label>
-                <textarea id="postExcerpt" pInputTextarea style="width: 100%; height: 300px" [autoResize]="false"></textarea>
+                <textarea id="postExcerpt" pInputTextarea style="width: 100%; height: 300px" [autoResize]="false" formControlName="excerpt"></textarea>
             </div>
             <div class="p-field">
                 <label for="postText">Текст</label>
-                <textarea id="postText" pInputTextarea style="width: 100%; height: 600px" [autoResize]="false"></textarea>
+                <textarea id="postText" pInputTextarea style="width: 100%; height: 600px" [autoResize]="false" formControlName="text"></textarea>
             </div>
         </form>
         <div class="p-col-4">
@@ -26,3 +26,4 @@
         </div>
     </div>
 </p-panel>
+<p-toast></p-toast>
