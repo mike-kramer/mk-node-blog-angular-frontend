@@ -114,4 +114,14 @@ export class AppComponent implements OnInit {
             document.body.classList.toggle("no-aside");
         }
     }
+
+    toggleAsideMobile() {
+        if (isPlatformBrowser(this.platform)) {
+            document.body.classList.toggle("aside-showed");
+        }
+    }
+
+    closeAside() {
+        document.body.classList.remove("aside-showed");
+    }
 }

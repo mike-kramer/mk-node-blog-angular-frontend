@@ -1,8 +1,13 @@
 <div class="app-container">
     <header>
-        <button pButton class="p-button-raised p-button-rounded" style="margin-right: 20px;" icon="pi pi-bars" (click)="toggleAside()"></button> <h1 [routerLink]="'/'" style="cursor: pointer;">Блог Михаила Крамера. PHP и JS</h1>
+        <button pButton class="p-button-raised p-button-rounded hide-aside" style="margin-right: 20px;" icon="pi pi-bars" (click)="toggleAside()"></button>
+        <button pButton class="p-button-raised p-button-rounded show-aside" style="margin-right: 20px;" icon="pi pi-bars" (click)="toggleAsideMobile()"></button>
+        <h1 [routerLink]="'/'" style="cursor: pointer;">Блог Михаила Крамера. PHP и JS</h1>
     </header>
     <aside>
+        <a href="#" class="close-button" (click)="$event.preventDefault(); closeAside();">
+            <i class="pi pi-times"></i>
+        </a>
         <div class="logo"  [routerLink]="'/'" style="cursor: pointer;"><span>MK</span> BLOG</div>
         <p-panelMenu *ngIf="menuInitialized" [model]="menu" [style]="{'width':'100%'}"></p-panelMenu>
     </aside>

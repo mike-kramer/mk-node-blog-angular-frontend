@@ -17,6 +17,18 @@ body {
             left: 0 !important;
         }
     }
+    @media (max-width: 1000px) {
+        padding-left: 0;
+        aside {
+            z-index: 1000 !important;
+            display: none;
+        }
+        &.aside-showed {
+            aside {
+                display: block;
+            }
+        }
+    }
 }
 a.p-button {
     text-decoration: none;
@@ -65,4 +77,16 @@ pre[class*="language-"].line-numbers > code {
     display: block;
     padding-right: 0.8em;
     text-align: right;
+}
+
+.close-button {
+    display: block;
+    width: 30px;
+    .pi {
+        font-size: 30px;
+    }
+    margin-bottom: 10px;
+    @media (min-width: 1001px) {
+        display: none;
+    }
 }
