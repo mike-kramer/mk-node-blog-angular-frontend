@@ -1,6 +1,6 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule, Title} from '@angular/platform-browser';
-
+import {TransferHttpCacheModule} from '@nguniversal/common'
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -57,6 +57,7 @@ registerLocaleData(ru);
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         BrowserAnimationsModule,
         HttpClientModule,
+        TransferHttpCacheModule,
         ReactiveFormsModule,
         InputTextModule,
         InputTextareaModule,
